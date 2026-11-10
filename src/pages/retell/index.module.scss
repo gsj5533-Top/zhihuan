@@ -1,0 +1,30 @@
+@use '@/styles/variables.scss' as *;
+.page { min-height: 100vh; padding: $page-padding $page-padding 200rpx; }
+
+.modeSwitch { display: flex; gap: 8rpx; padding: 8rpx; background: #EAF0EC; border-radius: $radius-lg; margin-bottom: $spacing-md; }
+.modeBtn { @include button-reset; flex: 1; height: 64rpx; border-radius: $radius-md; background: transparent; color: $color-text-tertiary; font-size: $font-size-sm; }
+.modeBtn.active { background: #fff; color: $color-text-primary; font-weight: $font-weight-semibold; box-shadow: $shadow-card; }
+
+.recCard { background: #fff; border: 1rpx solid $color-border; border-radius: $radius-lg; padding: $spacing-xl; box-shadow: $shadow-card; text-align: center; }
+.recLine { font-size: $font-size-xs; color: $color-text-tertiary; display: block; margin-bottom: 20rpx; }
+.bigMic { @include button-reset; width: 148rpx; height: 148rpx; border-radius: 50%; background: $color-primary; color: #fff; font-size: 56rpx; margin: 4rpx auto 0; box-shadow: 0 16rpx 40rpx rgba(11,158,95,.28); }
+.bigMic.rec { background: $color-coral; }
+.tip { display: block; font-size: $font-size-xs; color: $color-text-tertiary; margin-top: 24rpx; }
+.voiceBar { display: flex; align-items: center; gap: 16rpx; margin-top: $spacing-md; padding: $spacing-md; background: #F7FAF8; border-radius: $radius-md; }
+.playBtn { @include button-reset; width: 56rpx; height: 56rpx; border-radius: 50%; background: $color-primary; color: #fff; font-size: 24rpx; flex-shrink: 0; }
+.bars { flex: 1; display: flex; align-items: center; gap: 4rpx; height: 48rpx; overflow: hidden; }
+.barLine { flex: 1; min-width: 4rpx; border-radius: 2rpx; background: #C6D8CF; }
+.time { font-size: $font-size-sm; color: $color-text-tertiary; min-width: 72rpx; text-align: right; }
+
+.voiceActions { display: flex; gap: $spacing-sm; margin-top: $spacing-sm; }
+.actionBtn { @include button-reset; flex: 1; height: 64rpx; border-radius: $radius-md; background: #F4F8F6; border: 1rpx solid $color-border; color: $color-primary-dark; font-size: $font-size-xs; font-weight: $font-weight-semibold; }
+.actionBtnDanger { @include button-reset; flex: 1; height: 64rpx; border-radius: $radius-md; background: #FFF3F2; border: 1rpx solid #F5C6C1; color: #C0483C; font-size: $font-size-xs; font-weight: $font-weight-semibold; }
+
+.boardCard { background: #fff; border: 1rpx solid $color-border; border-radius: $radius-lg; padding: $spacing-lg; box-shadow: $shadow-card; }
+.board { height: 440rpx; border-radius: $radius-md; border: 1rpx solid $color-border; background: #fff; margin-bottom: $spacing-sm; }
+
+.note { font-size: $font-size-xs; color: $color-text-tertiary; line-height: 1.8; margin-top: $spacing-md; }
+
+.foot { position: fixed; left: 0; right: 0; bottom: 0; display: flex; gap: $spacing-md; padding: $spacing-lg $page-padding calc($spacing-lg + env(safe-area-inset-bottom)); background: $color-bg-page; border-top: 1rpx solid $color-divider; }
+.btnGhost { @include button-reset; height: 96rpx; width: 200rpx; border-radius: $radius-button; background: #fff; color: $color-primary-dark; border: 1rpx solid $color-border; font-size: $font-size-md; }
+.btnMain { @include button-reset; flex: 1; height: 96rpx; border-radius: $radius-button; background: $color-primary; color: #fff; font-size: $font-size-md; font-weight: $font-weight-semibold; }

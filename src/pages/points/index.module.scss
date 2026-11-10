@@ -1,0 +1,48 @@
+@use '@/styles/variables.scss' as *;
+
+.page { min-height: 100vh; padding: $page-padding 0 120rpx; }
+.paddingH { padding: 0 $page-padding; }
+
+.balance {
+  background: linear-gradient(140deg, $color-primary, $color-primary-dark);
+  border-radius: $radius-xl;
+  padding: $spacing-xl;
+  margin: 0 $page-padding $spacing-xl;
+  color: #fff;
+  box-shadow: 0 8rpx 32rpx rgba(11,158,95,.3);
+}
+.balanceSmall { font-size: $font-size-xs; letter-spacing: 2rpx; opacity: .85; }
+.balanceTitle { font-size: 72rpx; margin: 8rpx 0 4rpx; letter-spacing: -4rpx; font-weight: $font-weight-bold; }
+.balanceTitle em { font-size: $font-size-sm; font-style: normal; opacity: .85; margin-left: 8rpx; }
+.balanceRow { display: flex; gap: 40rpx; margin-top: $spacing-lg; font-size: $font-size-sm; opacity: .9; }
+
+.filters { display: flex; gap: 16rpx; padding: 4rpx $page-padding 16rpx; overflow-x: auto; white-space: nowrap; }
+.filters button {
+  @include button-reset;
+  height: 56rpx; padding: 0 24rpx; border-radius: 999rpx;
+  background: #fff; border: 1rpx solid $color-border;
+  color: $color-text-tertiary; font-size: $font-size-sm;
+}
+.filters button.active { background: $color-primary; border-color: $color-primary; color: #fff; font-weight: $font-weight-semibold; }
+
+.txList { padding: 0 $page-padding; }
+.tx {
+  display: flex; align-items: center; gap: 22rpx;
+  background: #fff; border: 1rpx solid $color-border; border-radius: $radius-lg;
+  padding: $spacing-lg; margin-bottom: $spacing-md; box-shadow: $shadow-card;
+}
+.txIcon {
+  width: 56rpx; height: 56rpx; border-radius: $radius-md;
+  background: $color-primary-soft; color: $color-primary-dark;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32rpx; font-weight: $font-weight-bold; flex-shrink: 0;
+}
+.txIconPending { background: $color-amber-soft; color: $color-amber; }
+.txIconUndo { background: #F1F5F3; color: $color-text-tertiary; }
+.txInfo { flex: 1; min-width: 0; }
+.txTitle { font-size: $font-size-md; font-weight: $font-weight-medium; @include text-ellipsis; }
+.txSub { font-size: $font-size-xs; color: $color-text-tertiary; margin-top: 6rpx; }
+.txPts { font-size: $font-size-lg; font-weight: $font-weight-bold; color: $color-primary-dark; flex-shrink: 0; }
+.txPtsPending { color: $color-amber; }
+.txPtsUndo { color: $color-text-tertiary; text-decoration: line-through; }
+.empty { text-align: center; font-size: $font-size-sm; color: $color-text-tertiary; padding: 100rpx 0; }

@@ -1,0 +1,45 @@
+@use '@/styles/variables.scss' as *;
+
+.page { min-height: 100vh; padding: $page-padding 0 120rpx; }
+
+.meCard {
+  display: flex; align-items: center; gap: $spacing-lg;
+  background: #fff; border: 1rpx solid $color-border; border-radius: $radius-xl;
+  padding: $spacing-xl $page-padding; margin: 0 $page-padding $spacing-xl;
+  box-shadow: $shadow-card;
+}
+.meAv {
+  width: 96rpx; height: 96rpx; border-radius: 50%;
+  background: linear-gradient(140deg, $color-primary, $color-primary-dark);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-size: 40rpx; font-weight: $font-weight-semibold; flex-shrink: 0;
+}
+.meInfo { flex: 1; min-width: 0; }
+.meName { font-size: $font-size-xl; font-weight: $font-weight-semibold; }
+.meDesc { font-size: $font-size-sm; color: $color-text-tertiary; margin-top: 6rpx; }
+.meLevel {
+  font-size: $font-size-xs; font-weight: $font-weight-semibold;
+  padding: 8rpx 20rpx; border-radius: 999rpx;
+  background: $color-primary-soft; color: $color-primary-dark; flex-shrink: 0;
+}
+
+.menu {
+  background: #fff; border: 1rpx solid $color-border;
+  border-radius: $radius-lg; overflow: hidden;
+  margin: 0 $page-padding $spacing-lg;
+  box-shadow: $shadow-card;
+}
+.menuRow {
+  display: flex; align-items: center; gap: $spacing-md;
+  padding: $spacing-lg; border-bottom: 1rpx solid $color-divider;
+  font-size: $font-size-md;
+}
+.menuRow:last-child { border-bottom: 0; }
+.menuIcon {
+  width: 52rpx; height: 52rpx; border-radius: $radius-md;
+  background: #F3F8F5; display: flex; align-items: center; justify-content: center;
+  font-size: 24rpx; flex-shrink: 0;
+}
+.menuText { flex: 1; }
+.menuArrow { color: $color-text-tertiary; font-size: $font-size-sm; }
+.note { text-align: center; font-size: $font-size-xs; color: $color-text-tertiary; padding: 0 $page-padding; line-height: 1.8; }

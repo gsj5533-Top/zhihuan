@@ -1,0 +1,69 @@
+@use '@/styles/variables.scss' as *;
+
+.page { min-height: 100vh; padding: $spacing-lg $page-padding 200rpx; }
+.foot {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  padding: $spacing-lg $page-padding calc($spacing-lg + env(safe-area-inset-bottom));
+  background: $color-bg-page; border-top: 1rpx solid $color-divider;
+}
+.sectionTitle { font-size: $font-size-md; font-weight: $font-weight-semibold; margin-bottom: $spacing-md; }
+
+.chipRow { display: flex; gap: $spacing-sm; padding: 4rpx 0 12rpx; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; }
+.chip {
+  @include button-reset;
+  flex-shrink: 0; height: 56rpx; padding: 0 28rpx; border-radius: 999rpx;
+  background: #fff; border: 1rpx solid $color-border;
+  color: $color-text-secondary; font-size: $font-size-sm;
+}
+.chip.active { background: $color-primary; border-color: $color-primary; color: #fff; font-weight: $font-weight-semibold; }
+
+.blockCard {
+  background: #fff; border: 1rpx solid $color-border; border-radius: $radius-lg;
+  padding: $spacing-lg; margin-bottom: $spacing-md; box-shadow: $shadow-card;
+}
+.blockHead { display: flex; align-items: center; justify-content: space-between; margin-bottom: $spacing-md; }
+.blockTitle { font-size: $font-size-md; font-weight: $font-weight-semibold; }
+.blockTag { font-size: $font-size-xs; font-weight: $font-weight-semibold; padding: 6rpx 16rpx; border-radius: 999rpx; background: $color-primary-soft; color: $color-primary-dark; }
+
+.inputTitle { font-size: 36rpx; font-weight: $font-weight-semibold; width: 100%; padding: 0; border: none; background: transparent; }
+.inputContent { font-size: $font-size-sm; color: $color-text-secondary; line-height: 1.8; width: 100%; padding: 0; border: none; background: transparent; min-height: 120rpx; }
+
+.topicHint { display: flex; align-items: center; gap: 8rpx; margin-top: 12rpx; }
+.topicHash { font-size: $font-size-sm; color: $color-primary; font-weight: $font-weight-bold; }
+.topicText { font-size: $font-size-sm; color: $color-primary-dark; font-weight: $font-weight-semibold; }
+.topicDesc { font-size: $font-size-xs; color: $color-text-tertiary; }
+.topicHintEmpty { font-size: $font-size-xs; color: $color-text-tertiary; margin-top: 12rpx; }
+
+.imgRow { display: flex; gap: $spacing-sm; margin-top: $spacing-md; flex-wrap: wrap; }
+.imgBox { width: 120rpx; height: 120rpx; border-radius: $radius-md; background: #F2F6F4; border: 1rpx solid $color-border; display: flex; align-items: center; justify-content: center; font-size: 48rpx; color: $color-text-tertiary; }
+.imgBox.add { border-style: dashed; background: #FBFDFC; }
+.imgThumb { position: relative; width: 120rpx; height: 120rpx; border-radius: $radius-md; overflow: hidden; background: #F2F6F4; }
+.imgThumbInner { width: 100%; height: 100%; display: block; }
+.imgDel {
+  position: absolute; top: 0; right: 0;
+  width: 36rpx; height: 36rpx; border-radius: 0 0 0 12rpx;
+  background: rgba(31, 45, 40, 0.66); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24rpx; line-height: 1;
+}
+
+.board { position: relative; height: 360rpx; border-radius: $radius-md; border: 1rpx solid $color-border; overflow: hidden; background: #fff; }
+.tip { position: absolute; left: 24rpx; bottom: 20rpx; font-size: $font-size-xs; color: $color-text-tertiary; }
+.toolbar { display: flex; gap: 12rpx; margin-top: $spacing-sm; flex-wrap: wrap; }
+.tool { @include button-reset; height: 48rpx; padding: 0 20rpx; border-radius: $radius-sm; background: #F4F8F6; border: 1rpx solid $color-border; color: $color-text-secondary; font-size: $font-size-xs; }
+.tool.active { background: $color-primary-soft; border-color: #BFE3D2; color: $color-primary-dark; font-weight: $font-weight-semibold; }
+
+.voice { display: flex; align-items: center; gap: $spacing-md; margin-top: $spacing-md; padding: $spacing-lg; background: #F7FAF8; border: 1rpx solid $color-border; border-radius: $radius-md; }
+.mic { @include button-reset; width: 68rpx; height: 68rpx; border-radius: 50%; background: $color-primary; color: #fff; font-size: 28rpx; }
+.mic.rec { background: $color-coral; }
+.bars { flex: 1; display: flex; align-items: center; gap: 4rpx; height: 48rpx; overflow: hidden; }
+.barLine { flex: 1; min-width: 4rpx; border-radius: 2rpx; background: #C6D8CF; }
+.time { font-size: $font-size-sm; color: $color-text-tertiary; min-width: 72rpx; text-align: right; }
+
+.voiceActions { display: flex; gap: $spacing-sm; margin-top: $spacing-sm; }
+.actionBtn { @include button-reset; flex: 1; height: 64rpx; border-radius: $radius-md; background: #F4F8F6; border: 1rpx solid $color-border; color: $color-primary-dark; font-size: $font-size-xs; font-weight: $font-weight-semibold; }
+.actionBtnDanger { @include button-reset; flex: 1; height: 64rpx; border-radius: $radius-md; background: #FFF3F2; border: 1rpx solid #F5C6C1; color: #C0483C; font-size: $font-size-xs; font-weight: $font-weight-semibold; }
+
+.note { font-size: $font-size-xs; color: $color-text-tertiary; line-height: 1.8; margin-top: $spacing-md; }
+.btnFoot { @include button-reset; width: 100%; height: 96rpx; border-radius: $radius-button; background: $color-primary; color: #fff; font-size: $font-size-md; font-weight: $font-weight-semibold; }
+.btnFoot.ghost { background: #fff; color: $color-primary-dark; border: 1rpx solid $color-border; }

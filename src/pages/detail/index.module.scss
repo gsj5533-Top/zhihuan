@@ -1,0 +1,30 @@
+@use '@/styles/variables.scss' as *;
+
+.page { min-height: 100vh; padding: $page-padding $page-padding 180rpx; }
+.seg { display: flex; gap: 8rpx; padding: 8rpx; background: #EAF0EC; border-radius: $radius-lg; margin: $spacing-md 0; }
+.segBtn { @include button-reset; flex: 1; height: 64rpx; border-radius: $radius-md; background: transparent; color: $color-text-tertiary; font-size: $font-size-sm; }
+.segBtn.active { background: #fff; color: $color-text-primary; font-weight: $font-weight-semibold; box-shadow: $shadow-card; }
+.card { background: #fff; border: 1rpx solid $color-border; border-radius: $radius-lg; padding: $spacing-lg; margin-bottom: $spacing-md; box-shadow: $shadow-card; }
+.knowTitle { font-size: $font-size-lg; font-weight: $font-weight-semibold; margin-bottom: $spacing-sm; }
+.knowContent { font-size: $font-size-sm; color: $color-text-secondary; line-height: 1.9; }
+.knowImgs { display: flex; gap: 12rpx; margin-top: $spacing-md; flex-wrap: wrap; }
+.knowImg { width: 200rpx; height: 200rpx; border-radius: $radius-md; background: #F2F6F4; }
+.quote { font-size: $font-size-xs; color: $color-text-tertiary; border-left: 4rpx solid #DCE8E2; padding-left: 16rpx; margin-top: $spacing-md; line-height: 1.7; }
+.board { height: 380rpx; border-radius: $radius-md; border: 1rpx solid $color-border; overflow: hidden; background: #fff; margin-bottom: $spacing-md; }
+.voiceBar { display: flex; align-items: center; gap: $spacing-md; padding: $spacing-md; background: #F7FAF8; border: 1rpx solid $color-border; border-radius: $radius-md; }
+.ptsPanel { background: #fff; border: 1rpx solid $color-border; border-radius: $radius-md; padding: $spacing-md; margin-top: $spacing-md; }
+.ptsHead { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: $spacing-sm; }
+.ptsHeadText { font-size: $font-size-sm; color: $color-text-tertiary; }
+.ptsHeadNum { font-size: 40rpx; color: $color-primary-dark; font-weight: $font-weight-bold; }
+.pcRow { display: flex; flex-wrap: wrap; gap: 12rpx; }
+.pc { font-size: $font-size-xs; padding: 8rpx 16rpx; border-radius: $radius-sm; background: #F4F8F6; border: 1rpx solid $color-border; color: $color-text-tertiary; }
+.pc.on { background: $color-primary-soft; border-color: #BFE3D2; color: $color-primary-dark; font-weight: $font-weight-semibold; }
+.pc.wait { background: $color-amber-soft; border-color: #F2DBA8; color: $color-amber; }
+.confirmStrip { display: flex; align-items: center; gap: $spacing-md; padding: $spacing-md; background: $color-primary-soft; border: 1rpx solid #BFE3D2; border-radius: $radius-md; margin-top: $spacing-md; }
+.confirmText { flex: 1; font-size: $font-size-xs; color: $color-primary-dark; line-height: 1.6; }
+.foot { position: fixed; left: 0; right: 0; bottom: 0; padding: $spacing-lg $page-padding calc($spacing-lg + env(safe-area-inset-bottom)); background: $color-bg-page; border-top: 1rpx solid $color-divider; }
+.btnFoot { @include button-reset; width: 100%; height: 96rpx; border-radius: $radius-button; background: $color-primary; color: #fff; font-size: $font-size-md; font-weight: $font-weight-semibold; }
+.btnFoot.disabled { background: #EDF1EF; color: $color-text-tertiary; }
+.badge { font-size: $font-size-xs; font-weight: $font-weight-semibold; padding: 4rpx 14rpx; border-radius: 999rpx; background: $color-amber-soft; color: $color-amber; }
+.badgeGreen { background: $color-primary-soft; color: $color-primary-dark; }
+.badgeCoral { background: $color-coral-soft; color: $color-coral; }

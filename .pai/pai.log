@@ -1,0 +1,44 @@
+[12:59:39.032] Try reusing port from lock file: 50469
+[12:59:39.143] Server listening on port 50469, PID 16944
+[12:59:39.265] readProjectFiles, Found 90 files to read.
+[Preview Server] 以下文件超过 2MB 已跳过（微信小程序单分包限制为 2MB，大文件建议使用 CDN 加载）:
+  .swc\plugins\v7_windows_x86_64_0.104.8\7175c2f701c258997803d93e6e53a285d375ab2d784ed9f0357fc9c4363590cb (2.7MB)
+[12:59:41.219] Starting PAI Cloud Dev...
+[12:59:42.302] [PAI SDK] createCloudSession response: {
+  "code": 0,
+  "msg": "success",
+  "sandboxId": "vefaas-f0vkicge-zwx1wbt5u0-dbo03f02g218l2qc7jqg-sandbox",
+  "endpoint": "https://sd62opo6oqou1ckhsuo00.apigateway-cn-beijing.volceapi.com"
+}
+[12:59:42.437] [PAI SDK] cloudServer.start called, appId: pai-preview-trae-8e622254
+[13:00:08.080] [PAI SDK] Received event: log {"content":"\n> taro_template@1.0.0 dev:h5\n> npm run build:h5 -- --watch\n\n\n> taro_template@1.0.0 build:h5\n> taro build --type h5 --watch\n\n","timestamp":1794114007459}
+[13:00:08.398] [PAI SDK] Received event: log {"content":"👽 Taro v4.1.9\n\n","timestamp":1794114007777}
+[13:00:09.508] [PAI SDK] Received event: log {"content":"Tips:\n1. 建议开启持久化缓存功能，能有效提升二次编译速度，详情请参考: https://docs.taro.zone/docs/config-detail#cache。\n\n\n","timestamp":1794114008886}
+[13:00:10.665] [PAI SDK] Received event: log {"content":"- 即将开始启动编译，请稍等~\n","timestamp":1794114010045}
+[13:00:25.949] [PAI SDK] Received event: log {"content":"✅  编译成功 11/8/2026, 1:00:25 PM\n\n","timestamp":1794114025327}
+[13:00:25.951] [PAI SDK] cloudServer.start response: {
+  "status": "running",
+  "msg": "Cloud Server started successfully.",
+  "hash": "pai-preview-trae-8e622254"
+}
+[13:20:23.325] File change detected. Updating...
+[13:20:23.400] readProjectFiles, Found 90 files to read.
+[Preview Server] 以下文件超过 2MB 已跳过（微信小程序单分包限制为 2MB，大文件建议使用 CDN 加载）:
+  .swc\plugins\v7_windows_x86_64_0.104.8\7175c2f701c258997803d93e6e53a285d375ab2d784ed9f0357fc9c4363590cb (2.7MB)
+[13:20:24.427] Files read. Count: 89
+[13:20:24.427] Calling pai.updateCloudDev...
+[13:20:24.430] [PAI SDK] cloudServer.update called, appId: pai-preview-trae-8e622254
+[13:20:24.576] [PAI SDK] Received event: reload {"url":"aipa://pai-preview-trae-8e622254.aipa-cloud.bytedance.net?type=pai","timestamp":1794115223964}
+[13:20:24.577] [PAI SDK] CloudServer received reload event: {"url":"aipa://pai-preview-trae-8e622254.aipa-cloud.bytedance.net?type=pai","timestamp":1794115223964}
+[13:20:24.577] [PAI SDK] reload, url = https://sd62opo6oqou1ckhsuo00.apigateway-cn-beijing.volceapi.com/?faasInstanceName=vefaas-f0vkicge-zwx1wbt5u0-dbo03f02g218l2qc7jqg-sandbox&hash=pai-preview-trae-8e622254
+[13:20:24.577] [PAI SDK] cloudServer.update response: {
+  "status": "running",
+  "reload": false,
+  "hash": "pai-preview-trae-8e622254"
+}
+[13:20:24.578] Update success (pai.updateCloudDev returned)
+[13:20:26.451] [PAI SDK] Received event: log {"content":"✅  编译成功 11/8/2026, 1:20:25 PM\n\n","timestamp":1794115225839}
+[13:59:40.665] Heartbeat timeout.
+[13:59:40.666] Shutting down...
+[13:59:40.667] Stopping Cloud Dev...
+[13:59:40.962] [PAI SDK] WebSocket closed, reconnecting (1/3)...

@@ -1,0 +1,31 @@
+@use '@/styles/variables.scss' as *;
+
+.stage {
+  position: relative;
+  border-radius: $radius-md;
+  border: 1rpx solid $color-border;
+  overflow: hidden;
+  background: #fff;
+}
+.canvas { width: 100%; height: 100%; }
+.mask {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: $font-size-xs; color: $color-text-tertiary;
+  background: #fff;
+}
+.tip {
+  position: absolute; left: 24rpx; bottom: 20rpx;
+  font-size: $font-size-xs; color: $color-text-tertiary;
+}
+.toolbar { display: flex; gap: 12rpx; margin-top: $spacing-sm; flex-wrap: wrap; }
+.tool {
+  @include button-reset;
+  height: 48rpx; padding: 0 20rpx; border-radius: $radius-sm;
+  background: #F4F8F6; border: 1rpx solid $color-border;
+  color: $color-text-secondary; font-size: $font-size-xs;
+}
+.tool.active {
+  background: $color-primary-soft; border-color: #BFE3D2;
+  color: $color-primary-dark; font-weight: $font-weight-semibold;
+}

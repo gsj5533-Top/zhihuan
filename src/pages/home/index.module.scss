@@ -1,0 +1,145 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  padding: 120rpx $page-padding 180rpx;
+  background: linear-gradient(180deg, #E6F7EF 0%, $color-bg-page 35%);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: $spacing-xl;
+}
+.headerTitle { font-size: $font-size-xxl; font-weight: $font-weight-bold; letter-spacing: -2rpx; }
+.headerSub { font-size: $font-size-sm; color: $color-text-tertiary; margin-top: 4rpx; }
+.trialTag {
+  display: inline-block; margin-top: 12rpx;
+  padding: 4rpx 16rpx; border-radius: 999rpx;
+  background: $color-amber-soft; color: $color-amber;
+  font-size: $font-size-xs; font-weight: $font-weight-semibold;
+}
+.ptChip {
+  display: inline-flex; align-items: center; gap: 6rpx;
+  height: 56rpx; padding: 0 20rpx;
+  border-radius: 999rpx;
+  background: $color-primary-soft;
+  border: 1rpx solid #CDEBDD;
+  font-size: $font-size-sm; color: $color-primary-dark; font-weight: $font-weight-semibold;
+}
+
+.hero {
+  background: $color-bg-card;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-xl;
+  padding: $spacing-xl;
+  box-shadow: $shadow-card;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: $spacing-xl;
+}
+.heroLabel { font-size: $font-size-xs; letter-spacing: 2rpx; font-weight: $font-weight-bold; color: $color-primary-dark; }
+.heroTitle { font-size: 40rpx; margin: 12rpx 0 8rpx; letter-spacing: -1rpx; font-weight: $font-weight-semibold; }
+.heroDesc { font-size: $font-size-sm; color: $color-text-secondary; line-height: 1.7; margin: 0; }
+.heroFoot {
+  display: flex; align-items: center; gap: 12rpx;
+  margin-top: 24rpx; padding-top: 20rpx;
+  border-top: 1rpx dashed $color-border;
+  font-size: $font-size-xs; color: $color-primary-dark;
+}
+.heroDot { width: 12rpx; height: 12rpx; border-radius: 50%; background: $color-primary; }
+.heroBtn {
+  @include button-reset;
+  width: 100%; height: 88rpx;
+  margin-top: 28rpx;
+  border-radius: $radius-button;
+  background: $color-primary;
+  color: #fff;
+  font-size: $font-size-md; font-weight: $font-weight-semibold;
+  transition: all $transition-base;
+  &:active { opacity: 0.9; transform: scale(0.98); }
+}
+
+.sectionHead {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin: $spacing-xl 0 $spacing-md;
+}
+.sectionHead h2 { font-size: $font-size-lg; font-weight: $font-weight-semibold; margin: 0; }
+.sectionHead span { font-size: $font-size-xs; color: $color-text-tertiary; }
+
+.card {
+  background: $color-bg-card;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+}
+.cardConfirm {
+  border-color: #BFE3D2;
+  background: linear-gradient(180deg, rgba(11,158,95,.05), $color-bg-card);
+}
+.cardTop { display: flex; align-items: flex-start; gap: $spacing-md; }
+.avatars { display: flex; flex-shrink: 0; }
+.av {
+  width: 64rpx; height: 64rpx; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: $font-size-sm; font-weight: $font-weight-semibold;
+  border: 4rpx solid #fff;
+  background: $color-primary-soft; color: $color-primary-dark;
+}
+.avMe { margin-left: -16rpx; background: #EAF1FD; color: $color-info; }
+.cardInfo { flex: 1; min-width: 0; }
+.cardName { font-size: $font-size-md; font-weight: $font-weight-semibold; @include text-ellipsis; }
+.cardTopic { font-size: $font-size-xs; color: $color-text-tertiary; margin-top: 4rpx; }
+.status {
+  flex-shrink: 0;
+  font-size: $font-size-xs; font-weight: $font-weight-semibold;
+  padding: 6rpx 16rpx; border-radius: 999rpx;
+  background: $color-amber-soft; color: $color-amber;
+  white-space: nowrap;
+}
+.statusGreen { background: $color-primary-soft; color: $color-primary-dark; }
+.statusWait { background: $color-amber-soft; color: $color-amber; }
+
+.progressRow { display: flex; align-items: center; gap: 18rpx; margin-top: $spacing-md; }
+.progressBar {
+  flex: 1; height: 10rpx; border-radius: 999rpx;
+  background: #E9EFEB; overflow: hidden;
+}
+.progressFill { height: 100%; border-radius: 999rpx; background: $color-primary; transition: width .4s; }
+.progressText { font-size: $font-size-xs; color: $color-text-tertiary; flex-shrink: 0; }
+
+.cardFoot {
+  display: flex; align-items: center; justify-content: space-between; gap: 20rpx;
+  margin-top: $spacing-md;
+}
+.cardFootDesc { font-size: $font-size-xs; color: $color-text-secondary; flex: 1; @include text-ellipsis-multi(1); }
+.btnSmall {
+  @include button-reset;
+  height: 56rpx; padding: 0 24rpx;
+  border-radius: $radius-button;
+  background: $color-primary; color: #fff;
+  font-size: $font-size-sm; font-weight: $font-weight-semibold;
+  transition: all $transition-base;
+  &:active { opacity: 0.9; transform: scale(0.97); }
+}
+.btnGhost { background: #fff; color: $color-primary-dark; border: 1rpx solid $color-border; }
+
+.doneRow {
+  display: flex; align-items: center; gap: 22rpx;
+  background: $color-bg-card; border: 1rpx solid $color-border;
+  border-radius: $radius-lg; padding: $spacing-lg; margin-bottom: $spacing-md;
+}
+.doneOk {
+  width: 60rpx; height: 60rpx; border-radius: 50%;
+  background: $color-primary-soft; color: $color-primary-dark;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28rpx; font-weight: $font-weight-bold; flex-shrink: 0;
+}
+.doneInfo { flex: 1; min-width: 0; }
+.doneName { font-size: $font-size-md; font-weight: $font-weight-semibold; @include text-ellipsis; }
+.doneDesc { font-size: $font-size-xs; color: $color-text-tertiary; margin-top: 4rpx; }
+.donePt { font-size: $font-size-lg; font-weight: $font-weight-bold; color: $color-primary-dark; }
+.empty { text-align: center; font-size: $font-size-sm; color: $color-text-tertiary; padding: 80rpx 0; }

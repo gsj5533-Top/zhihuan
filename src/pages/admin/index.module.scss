@@ -1,0 +1,4 @@
+@use '@/styles/variables.scss' as *;
+.page { min-height: 100vh; padding: $page-padding; }
+.title { font-size: 40rpx; font-weight: $font-weight-semibold; margin: 120rpx 0 12rpx; display: block; }
+.desc { font-size: $font-size-sm; color: $color-text-tertiary; line-height: 1.8; display: block; }

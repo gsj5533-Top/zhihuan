@@ -1,0 +1,26 @@
+@use '@/styles/variables.scss' as *;
+.page { min-height: 100vh; padding: $spacing-lg $page-padding 200rpx; }
+.title { font-size: 38rpx; font-weight: $font-weight-semibold; letter-spacing: -1rpx; display: block; }
+.sub { font-size: $font-size-xs; color: $color-text-tertiary; margin-top: 6rpx; display: block; margin-bottom: $spacing-lg; }
+
+.card { background: #fff; border: 1rpx solid $color-border; border-radius: $radius-lg; padding: $spacing-lg; margin-bottom: $spacing-md; box-shadow: $shadow-card; }
+.cardLabel { font-size: $font-size-xs; color: $color-text-tertiary; display: block; margin-bottom: 8rpx; }
+.cardText { font-size: $font-size-md; font-weight: 500; line-height: 1.5; }
+.voiceBar { display: flex; align-items: center; gap: $spacing-md; margin-top: $spacing-md; padding: $spacing-md; background: #F7FAF8; border: 1rpx solid $color-border; border-radius: $radius-md; }
+.playBtn { @include button-reset; width: 68rpx; height: 68rpx; border-radius: 50%; background: $color-primary; color: #fff; font-size: 28rpx; }
+.bars { flex: 1; display: flex; gap: 4rpx; height: 48rpx; }
+.barLine { flex: 1; min-width: 4rpx; border-radius: 2rpx; background: #C6D8CF; }
+.time { font-size: $font-size-sm; color: $color-text-tertiary; min-width: 72rpx; text-align: right; }
+
+.board { height: 300rpx; border-radius: $radius-md; border: 1rpx solid $color-border; overflow: hidden; background: #fff; margin-bottom: $spacing-md; }
+
+.ptsPanel { background: #fff; border: 1rpx solid $color-border; border-radius: $radius-md; padding: $spacing-md; margin-top: $spacing-md; }
+.ptsHead { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: $spacing-sm; }
+.ptsLabel { font-size: $font-size-sm; color: $color-text-tertiary; }
+.ptsNum { font-size: 40rpx; color: $color-primary-dark; font-weight: $font-weight-bold; }
+.pcRow { display: flex; gap: 12rpx; flex-wrap: wrap; }
+.pc { font-size: $font-size-xs; padding: 8rpx 16rpx; border-radius: $radius-sm; background: $color-primary-soft; border: 1rpx solid #BFE3D2; color: $color-primary-dark; font-weight: $font-weight-semibold; }
+
+.note { font-size: $font-size-xs; color: $color-text-tertiary; line-height: 1.8; margin-top: $spacing-md; }
+.foot { position: fixed; left: 0; right: 0; bottom: 0; padding: $spacing-lg $page-padding calc($spacing-lg + env(safe-area-inset-bottom)); background: $color-bg-page; border-top: 1rpx solid $color-divider; }
+.btnMain { @include button-reset; width: 100%; height: 96rpx; border-radius: $radius-button; background: $color-primary; color: #fff; font-size: $font-size-md; font-weight: $font-weight-semibold; }

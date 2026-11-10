@@ -1,0 +1,48 @@
+@use './styles/variables.scss' as *;
+
+/* ============================================
+   全局重置：box-sizing + overflow 防溢出
+   ============================================ */
+page,
+view,
+scroll-view,
+swiper,
+swiper-item,
+text,
+image,
+button,
+input,
+textarea,
+form,
+label,
+navigator,
+canvas {
+  box-sizing: border-box;
+}
+
+page {
+  background: $color-bg-page;
+  color: $color-text-primary;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+  font-size: 28rpx;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+scroll-view {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100vw;
+}
+
+button {
+  @include button-reset;
+}
+
+.pageContainer {
+  min-height: 100vh;
+  padding: 0 $page-padding 48rpx;
+}

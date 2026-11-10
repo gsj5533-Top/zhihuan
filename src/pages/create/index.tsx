@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { View, Text, ScrollView, Input, Textarea, Image } from '@tarojs/components'
-import Taro from '@tarojs/taro'
+import React, { useRef, useState } from 'react'
+import { View, Text, ScrollView, Input, Textarea, Image, Button, Canvas } from '@tarojs/components'
+import Taro, { useShareAppMessage } from '@tarojs/taro'
 import { callFunction } from '@/services/cloud'
 import useAppStore from '@/store/useAppStore'
 import useVoice from '@/hooks/useVoice'
@@ -19,16 +19,35 @@ function parseTopic(title: string): string {
   return m ? m[1] : ''
 }
 
+/**
+ * 生成邀请码（体验版：固定码；正式版：应从云函数 createExchange 返回）
+ */
+function makeInviteCode(exchangeId?: string): string {
+  if (exchangeId) return `ZH-${exchangeId.slice(-6).toUpperCase()}`
+  // 体验版 fallback：时间戳 + 随机 4 位
+  const t = Date.now().toString(36).slice(-4).toUpperCase()
+  const r = Math.random().toString(36).slice(2, 6).toUpperCase()
+  return `ZH-${t}${r}`
+}
+
 export default function CreatePage() {
   const setDemoMedia = useAppStore(s => s.setDemoMedia)
   const [title, setTitle] = useState('#专业 范围管理的三个关键判断')
   const [content, setContent] = useState('先定边界，再拆工作包，最后写验收标准。三者缺一，项目就会在变更里失控。')
   const [images, setImages] = useState<string[]>([])
   const [inkCount, setInkCount] = useState(0)
+  const [inviteCode, setInviteCode] = useState('')
+  const [showShareSheet, setShowShareSheet] = useState(false)
 
+  const posterCanvasId = 'poster_canvas'
   const voice = useVoice()
-
   const topic = parseTopic(title)
+
+  // -------- 分享卡片给好友（微信官方分享机制）--------
+  useShareAppMessage(() => ({
+    title: `【知换】${topic ? '#' + topic : ''}${title.replace(/^#\S+\s*/, '').trim()}`,
+    path: `/pages/home/index?inviteCode=${inviteCode}`
+  }))
 
   const pickImages = async () => {
     if (images.length >= 6) {
@@ -77,8 +96,9 @@ export default function CreatePage() {
       voiceDuration: voice.duration
     })
 
+    let exchangeId: string | undefined
     try {
-      await callFunction('createExchange', {
+      const res = await callFunction<{ _id?: string }>('createExchange', {
         topic,
         title: title.replace(/^#\S+\s*/, '').trim(),
         content,
@@ -87,16 +107,127 @@ export default function CreatePage() {
         lectureDuration: voice.duration,
         boardStrokes: inkCount
       })
+      exchangeId = res?._id
     } catch (e) {
       console.warn('[Create] createExchange 降级：', e)
     }
-    Taro.showActionSheet({
-      itemList: ['分享卡片给微信好友', '复制邀请链接', '邀请码发送'],
+
+    // 生成邀请码 + 打开分享面板
+    const code = makeInviteCode(exchangeId)
+    setInviteCode(code)
+    setShowShareSheet(true)
+  }
+
+  // -------- 复制邀请码 --------
+  const copyInviteCode = () => {
+    const text = `【知换】${title.replace(/^#\S+\s*/, '').trim()}\n邀请码：${inviteCode}\n打开微信搜索「知换」小程序，首页输入邀请码即可接收到我的知识交换邀请。`
+    Taro.setClipboardData({
+      data: text,
       success: () => {
-        Taro.showToast({ title: '邀请已发送', icon: 'success' })
-        setTimeout(() => Taro.navigateBack(), 800)
+        Taro.showToast({ title: '邀请码已复制', icon: 'success' })
       }
     })
+  }
+
+  // -------- 生成海报并保存到相册 --------
+  const savePoster = async () => {
+    try {
+      // 先请求相册权限
+      const auth = await Taro.getSetting()
+      if (!auth.authSetting['scope.writePhotosAlbum']) {
+        await Taro.authorize({ scope: 'scope.writePhotosAlbum' })
+      }
+
+      // 获取 canvas 节点
+      const canvasRes = await Taro.createSelectorQuery()
+        .select('#' + posterCanvasId)
+        .fields({ node: true, size: true })
+        .exec()
+
+      const canvas = canvasRes[0]?.node
+      if (!canvas) {
+        Taro.showToast({ title: '海报生成失败', icon: 'none' })
+        return
+      }
+      const ctx = canvas.getContext('2d')
+      const dpr = Taro.getSystemInfoSync().pixelRatio || 2
+      const W = 600
+      const H = 900
+      canvas.width = W * dpr
+      canvas.height = H * dpr
+      ctx.scale(dpr, dpr)
+
+      // 背景
+      ctx.fillStyle = '#0B9E5F'
+      ctx.fillRect(0, 0, W, H)
+      ctx.fillStyle = '#fff'
+      ctx.fillRect(20, 20, W - 40, H - 40)
+
+      // 标题
+      ctx.fillStyle = '#0B9E5F'
+      ctx.font = 'bold 32px sans-serif'
+      ctx.textAlign = 'center'
+      ctx.fillText('知 换', W / 2, 80)
+
+      // 主题 + 知识标题
+      ctx.fillStyle = '#1F2D28'
+      ctx.font = 'bold 24px sans-serif'
+      const displayTopic = topic ? '#' + topic : ''
+      const displayTitle = title.replace(/^#\S+\s*/, '').trim() || '知识交换'
+      ctx.fillText(`${displayTopic} ${displayTitle}`.trim(), W / 2, 140)
+
+      // 邀请码大字
+      ctx.fillStyle = '#0B9E5F'
+      ctx.font = 'bold 48px monospace'
+      ctx.fillText(inviteCode, W / 2, 260)
+
+      // 副标题
+      ctx.fillStyle = '#8A9A92'
+      ctx.font = '20px sans-serif'
+      ctx.fillText('扫码或复制邀请码，一起交换知识', W / 2, 320)
+
+      // 占位：模拟二维码区域（没有后端无法生成真实小程序码）
+      ctx.fillStyle = '#F2F6F4'
+      ctx.fillRect(W / 2 - 100, 380, 200, 200)
+      ctx.strokeStyle = '#0B9E5F'
+      ctx.lineWidth = 2
+      ctx.strokeRect(W / 2 - 100, 380, 200, 200)
+      ctx.fillStyle = '#0B9E5F'
+      ctx.font = 'bold 24px sans-serif'
+      ctx.fillText('知换', W / 2, 490)
+      ctx.fillStyle = '#8A9A92'
+      ctx.font = '16px sans-serif'
+      ctx.fillText('（小程序码·正式版生成）', W / 2, 520)
+
+      // 底部提示
+      ctx.fillStyle = '#8A9A92'
+      ctx.font = '18px sans-serif'
+      ctx.fillText('微信搜索「知换」· 邀请码可直接输入', W / 2, 820)
+
+      // 导出图片
+      const tempRes = await Taro.canvasToTempFilePath({
+        canvas,
+        fileType: 'jpg',
+        quality: 0.9
+      } as any)
+
+      await Taro.saveImageToPhotosAlbum({ filePath: tempRes.tempFilePath })
+      Taro.showToast({ title: '海报已保存到相册', icon: 'success' })
+    } catch (err: any) {
+      if (err?.errMsg?.includes('auth deny') || err?.errMsg?.includes('authorize')) {
+        Taro.showModal({
+          title: '需要相册权限',
+          content: '请在设置中允许保存图片到相册',
+          confirmText: '去设置',
+          success: r => {
+            if (r.confirm) Taro.openSetting()
+          }
+        })
+      } else {
+        console.error('[Create] 生成海报失败：', err)
+        Taro.showToast({ title: '保存失败，请重试', icon: 'none' })
+      }
+    }
   }
 
   return (
@@ -220,6 +351,64 @@ export default function CreatePage() {
           发送给对方
         </View>
       </View>
+
+      {/* 分享面板 */}
+      {showShareSheet && (
+        <View className={styles.shareMask} onClick={() => setShowShareSheet(false)}>
+          <View className={styles.shareSheet} onClick={e => e.stopPropagation()}>
+            <View className={styles.shareTitle}>交换已创建，邀请对方加入</View>
+            <View className={styles.shareCode}>
+              <Text className={styles.shareCodeLabel}>邀请码</Text>
+              <Text className={styles.shareCodeValue}>{inviteCode}</Text>
+            </View>
+            <View className={styles.shareActions}>
+              {/* 方式 1：微信官方分享卡片（open-type=share） */}
+              <Button
+                className={styles.shareBtn}
+                openType='share'
+                onClick={() => {
+                  Taro.showToast({ title: '请在系统面板点发送', icon: 'none' })
+                }}
+              >
+                <Text className={styles.shareBtnIcon}>💬</Text>
+                <Text>分享给微信好友</Text>
+              </Button>
+
+              {/* 方式 2：复制邀请码 */}
+              <View className={styles.shareBtn} onClick={copyInviteCode}>
+                <Text className={styles.shareBtnIcon}>📋</Text>
+                <Text>复制邀请码</Text>
+              </View>
+
+              {/* 方式 3：保存海报到相册 */}
+              <View className={styles.shareBtn} onClick={savePoster}>
+                <Text className={styles.shareBtnIcon}>🖼</Text>
+                <Text>保存海报到相册</Text>
+              </View>
+
+              <View
+                className={styles.shareCancel}
+                onClick={() => {
+                  setShowShareSheet(false)
+                  setTimeout(() => Taro.navigateBack(), 150)
+                }}
+              >
+                完成，返回
+              </View>
+            </View>
+            <View className={styles.shareTip}>
+              体验版提示：分享卡片仅体验成员间可互相打开；未认证用户建议用邀请码或海报分享
+            </View>
+          </View>
+        </View>
+      )}
+
+      {/* 离屏 Canvas：用于生成海报 */}
+      <Canvas
+        canvasId={posterCanvasId}
+        type="2d"
+        style={{ position: 'fixed', left: -9999, top: -9999, width: 600, height: 900 }}
+      />
     </ScrollView>
   )
 }
